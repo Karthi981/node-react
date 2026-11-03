@@ -25,6 +25,7 @@ const useAuthStore = create<AuthStore>((set) => ({
 
   checkAuth: async () => {
     set({ isChecking: true, error: null });
+
     try {
       const user = await getCurrentUser();
       set({ user });

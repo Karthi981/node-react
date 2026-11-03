@@ -28,8 +28,11 @@ const request = async (path: string, options: RequestInit = {}) => {
     },
   });
 
+  console.log("response", response.status);
+
   if (!response.ok) {
     const result = (await response.json()) as { message?: string };
+    console.error("API error:", result);
     throw new ApiError(
       result.message ?? "The request could not be completed",
       response.status,
