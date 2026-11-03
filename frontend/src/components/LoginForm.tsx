@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { useAuthStore } from "../store/authStore";
 
 type LoginFormProps = {
@@ -11,7 +11,7 @@ const LoginForm = ({ onSignUp }: LoginFormProps) => {
   const { login, error } = useAuthStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
     const formData = new FormData(event.currentTarget);

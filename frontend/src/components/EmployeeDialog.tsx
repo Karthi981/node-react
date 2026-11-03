@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 import {
   Dialog,
   DialogActions,
@@ -31,7 +31,7 @@ const EmployeeDialog = ({
     joiningDate: employee?.joiningDate ?? "",
   }));
 
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     const saved = await onSave(values);
     if (saved) {

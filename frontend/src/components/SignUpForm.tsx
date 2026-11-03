@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { useAuthStore } from "../store/authStore";
 
 type SignUpFormProps = {
@@ -13,7 +13,7 @@ const SignUpForm = ({ onSignIn }: SignUpFormProps) => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [formError, setFormError] = useState("");
 
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
     setIsRegistered(false);
@@ -43,13 +43,18 @@ const SignUpForm = ({ onSignIn }: SignUpFormProps) => {
       <form className="space-y-4" onSubmit={onSubmit}>
         <div>
           <h1 className="text-xl font-semibold">Create account</h1>
-          <p>Register to manage your employee directory.</p>
         </div>
 
-        {error && <p role="alert">{error}</p>}
-        {formError && <p role="alert">{formError}</p>}
+        {error && <p className="text-red-500">{error}</p>}
+        {formError && (
+          <p className="text-red-500" role="alert">
+            {formError}
+          </p>
+        )}
         {isRegistered && (
-          <p role="status">Account created. You can now sign in.</p>
+          <p className="text-green-500">
+            Account created. You can now sign in.
+          </p>
         )}
 
         <label className="block">

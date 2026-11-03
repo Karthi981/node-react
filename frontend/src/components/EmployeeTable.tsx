@@ -22,11 +22,13 @@ type EmployeeTableProps = {
 const EmployeeTable = ({ onEdit }: EmployeeTableProps) => {
   const { employees, isLoading, isSaving, error, deleteEmployee } =
     useEmployeeStore();
+
   const [pendingDelete, setPendingDelete] = useState<Employee | null>(null);
 
   const confirmDelete = async () => {
     if (pendingDelete) {
       const deleted = await deleteEmployee(pendingDelete.id);
+
       if (deleted) {
         setPendingDelete(null);
       }
