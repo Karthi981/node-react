@@ -1,8 +1,6 @@
 import type { Employee, EmployeeInput } from "../types/employee";
 
-const API_URL = (
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/api"
-).replace(/\/+$/, "");
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
 
 export type AuthUser = {
   id: string;

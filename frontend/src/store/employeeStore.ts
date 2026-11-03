@@ -1,14 +1,15 @@
 import { create } from "zustand";
 import {
-  addEmployee as createEmployeeRequest,
-  deleteEmployee as deleteEmployeeRequest,
+  addEmployee,
+  deleteEmployee,
   getEmployees,
-  updateEmployee as updateEmployeeRequest,
+  updateEmployee,
 } from "../lib/api";
 import type { Employee, EmployeeInput } from "../types/employee";
 
 type EmployeeStore = {
   employees: Employee[];
+
   isLoading: boolean;
   isSaving: boolean;
   error: string | null;
@@ -23,6 +24,7 @@ const useEmployeeStore = create<EmployeeStore>((set) => ({
   employees: [],
   isLoading: false,
   isSaving: false,
+
   error: null,
 
   loadEmployees: async () => {
@@ -43,7 +45,7 @@ const useEmployeeStore = create<EmployeeStore>((set) => ({
   addEmployee: async (input) => {
     set({ isSaving: true, error: null });
     try {
-      const employee = await createEmployeeRequest(input);
+      const employee = await addEmployee(input);
       set((state) => ({ employees: [employee, ...state.employees] }));
       return true;
     } catch (error) {
@@ -60,19 +62,17 @@ const useEmployeeStore = create<EmployeeStore>((set) => ({
   updateEmployee: async (id, input) => {
     set({ isSaving: true, error: null });
     try {
-      const employee = await updateEmployeeRequest(id, input);
+      const employee = await updateEmployee(id, input);
       set((state) => ({
         employees: state.employees.map((item) =>
-          item.id === id ? employee : item
+          item.id === id ? employee : item,
         ),
       }));
       return true;
     } catch (error) {
       set({
         error:
-          error instanceof Error
-            ? error.message
-            : "Could not update employee",
+          error instanceof Error ? error.message : "Could not update employee",
       });
       return false;
     } finally {
@@ -83,7 +83,7 @@ const useEmployeeStore = create<EmployeeStore>((set) => ({
   deleteEmployee: async (id) => {
     set({ isSaving: true, error: null });
     try {
-      await deleteEmployeeRequest(id);
+      await deleteEmployee(id);
       set((state) => ({
         employees: state.employees.filter((item) => item.id !== id),
       }));
@@ -91,9 +91,7 @@ const useEmployeeStore = create<EmployeeStore>((set) => ({
     } catch (error) {
       set({
         error:
-          error instanceof Error
-            ? error.message
-            : "Could not delete employee",
+          error instanceof Error ? error.message : "Could not delete employee",
       });
       return false;
     } finally {
