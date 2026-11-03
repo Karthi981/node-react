@@ -9,6 +9,7 @@ const getEmployeeInput = (body) => {
     typeof body?.designation === 'string' ? body.designation.trim() : '';
   const joiningDate =
     typeof body?.joiningDate === 'string' ? body.joiningDate : '';
+    
   const parsedDate = new Date(`${joiningDate}T00:00:00.000Z`); 
 
 

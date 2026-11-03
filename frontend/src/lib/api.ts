@@ -42,6 +42,8 @@ const request = async (path: string, options: RequestInit = {}) => {
 export const getCurrentUser = async () => {
   const response = await request("/users/me");
   const result = (await response.json()) as { user: AuthUser };
+
+  console.log("user", result);
   return result.user;
 };
 
@@ -50,7 +52,10 @@ export const loginUser = async (email: string, password: string) => {
     method: "POST",
     body: JSON.stringify({ email, password }),
   });
+
   const result = (await response.json()) as { user: AuthUser };
+
+  console.log("user", result);
   return result.user;
 };
 
@@ -76,6 +81,7 @@ export const getEmployees = async () => {
 };
 
 export const addEmployee = async (employee: EmployeeInput) => {
+  console.log("employee", employee);
   const response = await request("/employees", {
     method: "POST",
     body: JSON.stringify(employee),
@@ -85,6 +91,8 @@ export const addEmployee = async (employee: EmployeeInput) => {
 };
 
 export const updateEmployee = async (id: string, employee: EmployeeInput) => {
+  console.log("employeeId", id);
+
   const response = await request(`/employees/${encodeURIComponent(id)}`, {
     method: "PATCH",
     body: JSON.stringify(employee),
@@ -94,6 +102,7 @@ export const updateEmployee = async (id: string, employee: EmployeeInput) => {
 };
 
 export const deleteEmployee = async (id: string) => {
+  console.log("employeeId", id);
   await request(`/employees/${encodeURIComponent(id)}`, { method: "DELETE" });
 };
 

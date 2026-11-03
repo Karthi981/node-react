@@ -33,7 +33,7 @@ const LoginForm = ({ onSignUp }: LoginFormProps) => {
           <p>Sign in to manage your employees.</p>
         </div>
 
-        {error && <p role="alert">{error}</p>}
+        {error && <p>{error}</p>}
 
         <label className="block">
           Email
