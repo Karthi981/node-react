@@ -95,7 +95,7 @@ const EmployeeTable = ({ onEdit }: EmployeeTableProps) => {
         <DialogContent>Do you want to delete employee</DialogContent>
         <DialogActions>
           <button
-            className="rounded border px-4 py-1"
+            className=" border px-4 py-1"
             onClick={() => setPendingDelete(null)}
             disabled={isSaving}
             type="button"

@@ -65,9 +65,7 @@ export default function Home() {
   const handleLogout = async () => {
     try {
       await logout();
-    } catch {
-      // The store displays the request error and keeps the current session.
-    }
+    } catch {}
   };
 
   if (isChecking) {
