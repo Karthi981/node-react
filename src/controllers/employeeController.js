@@ -9,18 +9,8 @@ const getEmployeeInput = (body) => {
     typeof body?.designation === 'string' ? body.designation.trim() : '';
   const joiningDate =
     typeof body?.joiningDate === 'string' ? body.joiningDate : '';
-  const parsedDate = new Date(`${joiningDate}T00:00:00.000Z`);
+  const parsedDate = new Date(`${joiningDate}T00:00:00.000Z`); 
 
-  if (
-    !name ||
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
-    !designation ||
-    !/^\d{4}-\d{2}-\d{2}$/.test(joiningDate) ||
-    Number.isNaN(parsedDate.getTime()) ||
-    parsedDate.toISOString().slice(0, 10) !== joiningDate
-  ) {
-    return null;
-  }
 
   return { name, email, designation, joiningDate: parsedDate };
 };
